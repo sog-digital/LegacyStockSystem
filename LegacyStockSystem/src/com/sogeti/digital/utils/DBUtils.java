@@ -49,7 +49,7 @@ public class DBUtils {
 		statement = con.createStatement();
 
 		rs = statement.executeQuery(query);
-		close();
+		//close();
 		return rs;
 	}
 
@@ -58,7 +58,7 @@ public class DBUtils {
 		ResultSet rs;
 		PreparedStatement st = con.prepareStatement(query);
 		st.executeUpdate();
-		close();
+		//close();
 	}
 
 

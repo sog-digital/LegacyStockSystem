@@ -3,13 +3,10 @@ package com.sogeti.digital.lss.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
-
 import com.sogeti.digital.lss.model.Person;
 import com.sogeti.digital.utils.DBUtils;
 
 public class PersonRepoIml implements PersonRepoInterface {
-
 	
 	/**
 	 * 
@@ -40,14 +37,6 @@ public class PersonRepoIml implements PersonRepoInterface {
 		
 		return returnValue;
 	}
-	/**
-	 * 
-	 */
-	@Override
-	public Person read(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean update(Person person) {
@@ -61,6 +50,32 @@ public class PersonRepoIml implements PersonRepoInterface {
 		return false;
 	}
 	
-	
-
+	@Override
+	public Person read(String email) {
+		
+		Person person = null;
+		
+		String findPersonQuery = "Select * from stock.person where email='"+ email +"'";
+		try {
+		ResultSet rs = DBUtils.getResultSet(findPersonQuery);
+		
+			if(rs != null && rs.next()) {
+			
+				person = new Person();
+				person.setFirstName(rs.getString("firstname"));
+				person.setLastName(rs.getString("lastname"));
+				person.setDob(rs.getString("dob"));
+				person.setEmail(rs.getString("email"));
+				person.setId(rs.getInt("ID"));
+				
+			}
+		
+		} catch(SQLException sqle) {
+			System.out.println("excpetion in method login : " +sqle.getMessage());
+		}
+		
+		
+		// TODO Auto-generated method stub
+		return person;
+	}
 }

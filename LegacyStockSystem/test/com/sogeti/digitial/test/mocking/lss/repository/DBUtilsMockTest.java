@@ -1,4 +1,4 @@
-package com.sogeti.digital.test.utils;
+package com.sogeti.digitial.test.mocking.lss.repository;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
