@@ -14,14 +14,14 @@
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:person" type="tns:Person"/>
       </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="read" qname="operNS:read" returnQName="retNS:readReturn" returnType="rtns:Person" soapAction="">
-        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="changePassword" qname="operNS:changePassword" returnQName="retNS:changePasswordReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:person" type="tns:Person"/>
       </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="login" qname="operNS:login" returnQName="retNS:loginReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
-      </operation>
-      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="changePassword" qname="operNS:changePassword" returnQName="retNS:changePasswordReturn" returnType="rtns:boolean" soapAction="">
-        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:person" type="tns:Person"/>
       </operation>
       <parameter name="allowedMethods" value="read update login changePassword"/>
 

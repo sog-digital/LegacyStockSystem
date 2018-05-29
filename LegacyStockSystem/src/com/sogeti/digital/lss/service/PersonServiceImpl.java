@@ -16,12 +16,6 @@ public class PersonServiceImpl implements PersonServiceInterface {
 	}
 
 	@Override
-	public Person read(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean update(Person person) {
 		// TODO Auto-generated method stub
 		return false;
@@ -32,8 +26,11 @@ public class PersonServiceImpl implements PersonServiceInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
-	
+
+	@Override
+	public Person read(String email) {
+		// TODO Auto-generated method stub
+		return personService.read(email);
+	}
 
 }

@@ -27,14 +27,14 @@
    <ns3:parameter qname="ns1:person" type="ns2:Person" xmlns:ns2="http://model.lss.digital.sogeti.com" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
   </ns2:operation>
   <ns1:operation name="read" qname="ns3:read" returnQName="ns3:readReturn" returnType="ns4:Person" soapAction="" xmlns:ns3="http://service.lss.digital.sogeti.com" xmlns:ns4="http://model.lss.digital.sogeti.com">
-   <ns1:parameter qname="ns3:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns3:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="login" qname="ns5:login" returnQName="ns5:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns5:email" type="xsd:string"/>
-   <ns1:parameter qname="ns5:password" type="xsd:string"/>
+  <ns1:operation name="changePassword" qname="ns5:changePassword" returnQName="ns5:changePasswordReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:person" type="ns6:Person" xmlns:ns6="http://model.lss.digital.sogeti.com"/>
   </ns1:operation>
-  <ns1:operation name="changePassword" qname="ns6:changePassword" returnQName="ns6:changePasswordReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns6:person" type="ns7:Person" xmlns:ns7="http://model.lss.digital.sogeti.com"/>
+  <ns1:operation name="login" qname="ns7:login" returnQName="ns7:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:email" type="xsd:string"/>
+   <ns1:parameter qname="ns7:password" type="xsd:string"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="read update login changePassword"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
