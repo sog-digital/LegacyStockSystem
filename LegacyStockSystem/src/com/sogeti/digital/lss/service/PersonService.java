@@ -1,8 +1,8 @@
-package com.sogeti.digital.lss.repository;
+package com.sogeti.digital.lss.service;
 
 import com.sogeti.digital.lss.model.Person;
 
-public interface PersonRepoInterface {
+public interface PersonService {
 	
 	public boolean login(String email, String password);
 

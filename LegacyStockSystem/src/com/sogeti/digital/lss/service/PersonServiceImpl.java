@@ -1,18 +1,25 @@
 package com.sogeti.digital.lss.service;
 
 import com.sogeti.digital.lss.model.Person;
-import com.sogeti.digital.lss.repository.PersonRepoIml;
-import com.sogeti.digital.lss.repository.PersonRepoInterface;
+import com.sogeti.digital.lss.repository.PersonRepoImpl;
+import com.sogeti.digital.lss.repository.PersonRepo;
 
-public class PersonServiceImpl implements PersonServiceInterface {
+public class PersonServiceImpl implements PersonService {
 	
-	PersonRepoInterface personService = new PersonRepoIml();
+	PersonRepo personRepo = new PersonRepoImpl();
 	
-
+	
 	@Override
 	public boolean login(String email, String password) {
-		// TODO Auto-generated method stub
-		return personService.login(email, password);
+		
+		Person p = personRepo.read(email);
+		
+		if (p != null && !p.equals("null") && password.equals(p.getPassword())) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
@@ -23,14 +30,14 @@ public class PersonServiceImpl implements PersonServiceInterface {
 
 	@Override
 	public boolean changePassword(Person person) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return personRepo.changePassword(person);
 	}
 
 	@Override
 	public Person read(String email) {
 		// TODO Auto-generated method stub
-		return personService.read(email);
+		return personRepo.read(email);
 	}
 
 }
