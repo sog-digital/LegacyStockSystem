@@ -43,27 +43,23 @@ public class DBUtils {
 
 	public static ResultSet getResultSet(String query) throws SQLException {
 
-		Connection con = loadDriver();
-		ResultSet rs;
-		Statement statement;
+		con = loadDriver();
 		statement = con.createStatement();
 
-		rs = statement.executeQuery(query);
-		//close();
-		return rs;
+		resultSet = statement.executeQuery(query);
+		return resultSet;
 	}
 
 	public static void runQuery(String query) throws SQLException {
-
-		ResultSet rs;
+		
+		con = loadDriver();
 		PreparedStatement st = con.prepareStatement(query);
 		st.executeUpdate();
-		//close();
 	}
 
 
 	// You need to close the resultSet
-	private static  void close() {
+	public static  void close() {
 		try {
 			if (resultSet != null) {
 				resultSet.close();
@@ -77,6 +73,7 @@ public class DBUtils {
 				con.close();
 			}
 		} catch (Exception e) {
+			System.out.println("error in close database resources" +e.getMessage());
 
 		}
 	}
