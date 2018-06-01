@@ -1,0 +1,37 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from StockServiceImplService WSDL service -->
+
+  <service name="StockServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.lss.digital.sogeti.com"/>
+      <parameter name="wsdlServiceElement" value="StockServiceImplService"/>
+      <parameter name="schemaQualified" value="http://model.lss.digital.sogeti.com,http://service.lss.digital.sogeti.com"/>
+      <parameter name="wsdlServicePort" value="StockServiceImpl"/>
+      <parameter name="className" value="com.sogeti.digital.lss.service.StockServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="StockServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="create" qname="operNS:create" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:createReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:product" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:Product" xmlns:tns="http://model.lss.digital.sogeti.com"/>
+      </operation>
+      <parameter name="allowedMethods" value="create"/>
+
+      <typeMapping
+        xmlns:ns="http://model.lss.digital.sogeti.com"
+        qname="ns:Product"
+        type="java:com.sogeti.digital.lss.model.Product"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

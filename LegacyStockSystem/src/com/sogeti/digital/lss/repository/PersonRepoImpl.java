@@ -10,12 +10,6 @@ import com.sogeti.digital.utils.DBUtils;
 public class PersonRepoImpl implements PersonRepo {
 	
 	@Override
-	public boolean update(Person person) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean changePassword(Person person) {
 		
 		boolean returnValue = true;
@@ -60,7 +54,6 @@ public class PersonRepoImpl implements PersonRepo {
 		} finally {
 			DBUtils.close();
 		}
-		
 	
 		return person;
 	}

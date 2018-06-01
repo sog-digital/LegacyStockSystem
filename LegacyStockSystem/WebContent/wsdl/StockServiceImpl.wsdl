@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.lss.digital.sogeti.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.lss.digital.sogeti.com" xmlns:intf="http://service.lss.digital.sogeti.com" xmlns:tns1="http://model.lss.digital.sogeti.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.lss.digital.sogeti.com"/>
+   <element name="create">
+    <complexType>
+     <sequence>
+      <element name="product" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createResponse">
+    <complexType>
+     <sequence>
+      <element name="createReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Product">
+    <sequence>
+     <element name="amount" type="xsd:int"/>
+     <element name="id" type="xsd:int"/>
+     <element name="lastCreated" nillable="true" type="xsd:string"/>
+     <element name="lastUpdated" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="price" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="createResponse">
+
+      <wsdl:part element="impl:createResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createRequest">
+
+      <wsdl:part element="impl:create" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="StockServiceImpl">
+
+      <wsdl:operation name="create">
+
+         <wsdl:input message="impl:createRequest" name="createRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createResponse" name="createResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="StockServiceImplSoapBinding" type="impl:StockServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="create">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="StockServiceImplService">
+
+      <wsdl:port binding="impl:StockServiceImplSoapBinding" name="StockServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/LegacyStockSystem/services/StockServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
