@@ -23,12 +23,6 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public boolean update(Person person) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean changePassword(Person person) {
 		
 		return personRepo.changePassword(person);
