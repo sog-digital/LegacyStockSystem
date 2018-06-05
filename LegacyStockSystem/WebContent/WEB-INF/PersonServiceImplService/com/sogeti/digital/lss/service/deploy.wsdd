@@ -10,9 +10,6 @@
       <parameter name="className" value="com.sogeti.digital.lss.service.PersonServiceImpl"/>
       <parameter name="wsdlPortType" value="PersonServiceImpl"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="update" qname="operNS:update" returnQName="retNS:updateReturn" returnType="rtns:boolean" soapAction="">
-        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:person" type="tns:Person"/>
-      </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="read" qname="operNS:read" returnQName="retNS:readReturn" returnType="rtns:Person" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
       </operation>
@@ -23,7 +20,7 @@
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
       </operation>
-      <parameter name="allowedMethods" value="read update login changePassword"/>
+      <parameter name="allowedMethods" value="read login changePassword"/>
 
       <typeMapping xmlns:ns="http://model.lss.digital.sogeti.com" qname="ns:Person" type="java:com.sogeti.digital.lss.model.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>

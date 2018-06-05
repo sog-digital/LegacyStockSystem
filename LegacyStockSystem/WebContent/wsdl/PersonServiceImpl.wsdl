@@ -5,20 +5,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://service.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://model.lss.digital.sogeti.com"/>
-   <element name="update">
-    <complexType>
-     <sequence>
-      <element name="person" type="tns1:Person"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="updateResponse">
-    <complexType>
-     <sequence>
-      <element name="updateReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="read">
     <complexType>
      <sequence>
@@ -79,14 +65,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="updateResponse">
-
-      <wsdl:part element="impl:updateResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="changePasswordRequest">
 
       <wsdl:part element="impl:changePassword" name="parameters">
@@ -119,14 +97,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="updateRequest">
-
-      <wsdl:part element="impl:update" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="changePasswordResponse">
 
       <wsdl:part element="impl:changePasswordResponse" name="parameters">
@@ -144,18 +114,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </wsdl:message>
 
    <wsdl:portType name="PersonServiceImpl">
-
-      <wsdl:operation name="update">
-
-         <wsdl:input message="impl:updateRequest" name="updateRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:updateResponse" name="updateResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="read">
 
@@ -198,24 +156,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="PersonServiceImplSoapBinding" type="impl:PersonServiceImpl">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
-      <wsdl:operation name="update">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="updateRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="updateResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="read">
 
