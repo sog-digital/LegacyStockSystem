@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="9c57cabf-ff7a-4925-8374-e46342c510d4" activeEnvironment="Default" name="LSSStockSOAPServicesTest" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="2faa17ec-4a59-4995-8083-73af87993306" wsaVersion="NONE" name="StockServiceImplSoapBinding" type="wsdl" bindingName="{http://service.lss.digital.sogeti.com}StockServiceImplSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl"><con:part><con:url>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.lss.digital.sogeti.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.lss.digital.sogeti.com" xmlns:intf="http://service.lss.digital.sogeti.com" xmlns:tns1="http://model.lss.digital.sogeti.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project id="9c57cabf-ff7a-4925-8374-e46342c510d4" activeEnvironment="Default" name="LSSStockSOAPServicesTest" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="2faa17ec-4a59-4995-8083-73af87993306" wsaVersion="NONE" name="StockServiceImplSoapBinding" type="wsdl" bindingName="{http://service.lss.digital.sogeti.com}StockServiceImplSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl"><con:part><con:url>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.lss.digital.sogeti.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.lss.digital.sogeti.com" xmlns:intf="http://service.lss.digital.sogeti.com" xmlns:tns1="http://model.lss.digital.sogeti.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:types>
@@ -19,6 +19,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
           </sequence>
         </complexType>
       </element>
+      <element name="getStock">
+        <complexType>
+          <sequence>
+            <element name="id" type="xsd:int"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getStockResponse">
+        <complexType>
+          <sequence>
+            <element name="getStockReturn" type="tns1:Product"/>
+          </sequence>
+        </complexType>
+      </element>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://model.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Product">
@@ -33,8 +47,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       </complexType>
     </schema>
   </wsdl:types>
+  <wsdl:message name="getStockRequest">
+    <wsdl:part element="impl:getStock" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="createResponse">
     <wsdl:part element="impl:createResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStockResponse">
+    <wsdl:part element="impl:getStockResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:message name="createRequest">
     <wsdl:part element="impl:create" name="parameters"></wsdl:part>
@@ -43,6 +63,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <wsdl:operation name="create">
       <wsdl:input message="impl:createRequest" name="createRequest"></wsdl:input>
       <wsdl:output message="impl:createResponse" name="createResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <wsdl:input message="impl:getStockRequest" name="getStockRequest"></wsdl:input>
+      <wsdl:output message="impl:getStockResponse" name="getStockResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StockServiceImplSoapBinding" type="impl:StockServiceImpl">
@@ -53,6 +77,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="createResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getStockRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStockResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -76,4 +109,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </ser:product>\r
       </ser:create>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="2dae8863-37fa-420b-a2ba-60016a4ddb19" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:create>\r
+         <ser:product>\r
+            <mod:amount>?</mod:amount>\r
+            <mod:id>?</mod:id>\r
+            <mod:lastCreated>?</mod:lastCreated>\r
+            <mod:lastUpdated>?</mod:lastUpdated>\r
+            <mod:name>?</mod:name>\r
+            <mod:price>?</mod:price>\r
+         </ser:product>\r
+      </ser:create>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/></con:call></con:operation><con:operation id="d50de3ab-563a-43aa-9af2-f940c5e2a045" isOneWay="false" action="" name="getStock" bindingOperationName="getStock" type="Request-Response" outputName="getStockResponse" inputName="getStockRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54fbf822-a069-4fd6-9c2e-12a31baad4ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getStock>\r
+         <ser:id>1</ser:id>\r
+      </ser:getStock>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

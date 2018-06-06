@@ -13,7 +13,10 @@
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="create" qname="operNS:create" returnQName="retNS:createReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:product" type="tns:Product"/>
       </operation>
-      <parameter name="allowedMethods" value="create"/>
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getStock" qname="operNS:getStock" returnQName="retNS:getStockReturn" returnType="rtns:Product" soapAction="">
+        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getStock create"/>
 
       <typeMapping xmlns:ns="http://model.lss.digital.sogeti.com" qname="ns:Product" type="java:com.sogeti.digital.lss.model.Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>
