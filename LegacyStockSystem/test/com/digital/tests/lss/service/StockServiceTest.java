@@ -1,6 +1,9 @@
 package com.digital.tests.lss.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +43,76 @@ public class StockServiceTest {
 		};
 
 		assertTrue("create stock", ssi.create(product));
+	}
+	
+	@Test	
+	public void createStockWhenSendingNullObject() {
+
+		new Expectations() {
+			{
+				result = false;				
+			}
+		};
+
+		assertFalse("create stock failed", ssi.create(null));
+	}
+	
+	@Test
+	public void createStockFailsInCreatingNewStock() {
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@Test
+	public void getValidStock() {
+		
+		Product product = new Product();
+		product.setId(1);
+
+		new Expectations() {
+			{
+				spi.getStock(1);
+				result = product;				
+			}
+		};
+
+		assertEquals(1, ssi.getStock(1).getId());
+	}
+	
+	@Test
+	public void getStockbyInvalidStockId() {
+		
+		Product product = new Product();
+		product.setId(-1);
+
+		new Expectations() {
+			{
+				result = null;				
+			}
+		};
+
+		assertNull(ssi.getStock(-1), "Null is returned by the getStock(-1) call");
+	}
+	
+	
+	@Test
+	public void getStockWhenStockNotFound() {
+		
+		new Expectations() {
+			{
+				spi.getStock(2020);
+				result = null;				
+			}
+		};
+
+		assertNull(ssi.getStock(2020), "Null is returned when the Stock not found");
 	}
 
 }

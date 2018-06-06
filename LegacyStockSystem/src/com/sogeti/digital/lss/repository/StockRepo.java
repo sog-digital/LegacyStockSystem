@@ -11,6 +11,18 @@ import com.sogeti.digital.lss.model.Product;
  */
 public interface StockRepo {
 	
+	/**
+	 * @param product
+	 * @return
+	 */
 	public boolean create(Product product);
+	
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public Product getStock(int id);
+	
 
 }

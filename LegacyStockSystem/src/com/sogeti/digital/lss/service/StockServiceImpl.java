@@ -21,10 +21,28 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public boolean create(Product product) {
 	
-		return stockRepo.create(product);
+		if(product == null ) {
+			
+			return false;
+		} else {
+			
+			return stockRepo.create(product);
+		}
 	}
-	
-	
-	
+
+	/* (non-Javadoc)
+	 * @see com.sogeti.digital.lss.service.StockService#getStock(int)
+	 */
+	@Override
+	public Product getStock(int id) {
+
+		if( id > 0) {
+		
+			return stockRepo.getStock(id);
+		} else {
+			
+			return null;
+		}
+	}
 
 }
