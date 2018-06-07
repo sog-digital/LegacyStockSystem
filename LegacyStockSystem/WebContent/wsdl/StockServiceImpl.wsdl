@@ -33,6 +33,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getAllTheStocks">
+    <complexType/>
+   </element>
+   <element name="getAllTheStocksResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllTheStocksReturn" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://model.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="Product">
@@ -47,6 +57,22 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </complexType>
   </schema>
  </wsdl:types>
+
+   <wsdl:message name="getAllTheStocksResponse">
+
+      <wsdl:part element="impl:getAllTheStocksResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllTheStocksRequest">
+
+      <wsdl:part element="impl:getAllTheStocks" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
 
    <wsdl:message name="getStockRequest">
 
@@ -106,6 +132,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getAllTheStocks">
+
+         <wsdl:input message="impl:getAllTheStocksRequest" name="getAllTheStocksRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllTheStocksResponse" name="getAllTheStocksResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="StockServiceImplSoapBinding" type="impl:StockServiceImpl">
@@ -141,6 +179,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getStockResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTheStocks">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllTheStocksRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllTheStocksResponse">
 
             <wsdlsoap:body use="literal"/>
 

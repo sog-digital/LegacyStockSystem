@@ -26,7 +26,9 @@
       <operation name="getStock" qname="operNS:getStock" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:getStockReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:Product" xmlns:rtns="http://model.lss.digital.sogeti.com" soapAction="" >
         <parameter qname="pns:id" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <parameter name="allowedMethods" value="getStock create"/>
+      <operation name="getAllTheStocks" qname="operNS:getAllTheStocks" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:getAllTheStocksReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:Product" xmlns:rtns="http://model.lss.digital.sogeti.com" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="getAllTheStocks getStock create"/>
 
       <typeMapping
         xmlns:ns="http://model.lss.digital.sogeti.com"
