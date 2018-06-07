@@ -1,5 +1,7 @@
 package com.sogeti.digital.lss.service;
 
+import java.util.List;
+
 import com.sogeti.digital.lss.model.Product;
 
 public interface StockService {
@@ -20,5 +22,14 @@ public interface StockService {
 	 * @return Product details object
 	 */
 	public Product getStock(int id);
+	
+	/**
+	 * This method allows the users to get the list of all the stocks
+	 * from the Legacy Stock Control System
+	 * 
+	 * @return all the stocks list
+	 */
+	public Product[] getAllTheStocks();
+	
 	
 }

@@ -6,6 +6,8 @@ package com.sogeti.digital.lss.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sogeti.digital.lss.model.Person;
 import com.sogeti.digital.lss.model.Product;
@@ -72,8 +74,44 @@ public class StockRepoImpl implements StockRepo {
 	
 		return product;
 	}
+
+	@Override
+	public Product[] getAllTheStocks() {
+		
+		Product[] products = null;
+		List<Product> productList = new ArrayList<Product>();
+		
+		String findStockQuery = "Select * from stock.product";
+		
+		try {
+			ResultSet rs = DBUtils.getResultSet(findStockQuery);
+		
+			if(rs != null ) {
+				
+				while(rs.next()) {
+
+					Product product = new Product();
+					product.setId(rs.getInt("productID"));
+					product.setName(rs.getString("name"));
+					product.setPrice(rs.getString("price"));
+					product.setAmount(rs.getInt("amount"));
+					productList.add(product);
+				}
+			 	
+			}
+		
+		} catch(SQLException sqle) {
+			System.out.println("excpetion in method getAllTheStocks : " +sqle.getMessage());
+		} finally {
+			DBUtils.close();
+		}
+		
+		if(!productList.isEmpty() && productList.size() > 0 ) {
+			products = new Product[productList.size()];
+			products = productList.toArray(products);
+		}
 	
-	
-	
+		return products;
+	}
 
 }
