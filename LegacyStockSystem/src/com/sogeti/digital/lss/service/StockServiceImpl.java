@@ -3,6 +3,8 @@
  */
 package com.sogeti.digital.lss.service;
 
+import java.util.List;
+
 import com.sogeti.digital.lss.model.Product;
 import com.sogeti.digital.lss.repository.StockRepo;
 import com.sogeti.digital.lss.repository.StockRepoImpl;
@@ -43,6 +45,12 @@ public class StockServiceImpl implements StockService {
 			
 			return null;
 		}
+	}
+
+	@Override
+	public Product[] getAllTheStocks() {
+	
+		return stockRepo.getAllTheStocks();
 	}
 
 }

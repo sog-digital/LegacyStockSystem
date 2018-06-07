@@ -3,6 +3,8 @@
  */
 package com.sogeti.digital.lss.repository;
 
+import java.util.List;
+
 import com.sogeti.digital.lss.model.Product;
 
 /**
@@ -23,6 +25,11 @@ public interface StockRepo {
 	 * @return
 	 */
 	public Product getStock(int id);
+	
+	/**
+	 * @return
+	 */
+	public Product[] getAllTheStocks();
 	
 
 }
