@@ -5,6 +5,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:types>
     <schema elementFormDefault="qualified" targetNamespace="http://service.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
       <import namespace="http://model.lss.digital.sogeti.com"/>
+      <element name="update">
+        <complexType>
+          <sequence>
+            <element name="product" type="tns1:Product"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="updateResponse">
+        <complexType>
+          <sequence>
+            <element name="updateReturn" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="create">
         <complexType>
           <sequence>
@@ -19,6 +33,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
           </sequence>
         </complexType>
       </element>
+      <element name="getAllTheStocks">
+        <complexType/>
+      </element>
+      <element name="getAllTheStocksResponse">
+        <complexType>
+          <sequence>
+            <element maxOccurs="unbounded" name="getAllTheStocksReturn" type="tns1:Product"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="getStock">
         <complexType>
           <sequence>
@@ -30,16 +54,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
         <complexType>
           <sequence>
             <element name="getStockReturn" type="tns1:Product"/>
-          </sequence>
-        </complexType>
-      </element>
-      <element name="getAllTheStocks">
-        <complexType/>
-      </element>
-      <element name="getAllTheStocksResponse">
-        <complexType>
-          <sequence>
-            <element maxOccurs="unbounded" name="getAllTheStocksReturn" type="tns1:Product"/>
           </sequence>
         </complexType>
       </element>
@@ -60,6 +74,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:message name="getAllTheStocksResponse">
     <wsdl:part element="impl:getAllTheStocksResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part element="impl:updateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getAllTheStocksRequest">
     <wsdl:part element="impl:getAllTheStocks" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -75,22 +92,38 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:message name="createRequest">
     <wsdl:part element="impl:create" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="updateRequest">
+    <wsdl:part element="impl:update" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:portType name="StockServiceImpl">
+    <wsdl:operation name="update">
+      <wsdl:input message="impl:updateRequest" name="updateRequest"></wsdl:input>
+      <wsdl:output message="impl:updateResponse" name="updateResponse"></wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="create">
       <wsdl:input message="impl:createRequest" name="createRequest"></wsdl:input>
       <wsdl:output message="impl:createResponse" name="createResponse"></wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getStock">
-      <wsdl:input message="impl:getStockRequest" name="getStockRequest"></wsdl:input>
-      <wsdl:output message="impl:getStockResponse" name="getStockResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getAllTheStocks">
       <wsdl:input message="impl:getAllTheStocksRequest" name="getAllTheStocksRequest"></wsdl:input>
       <wsdl:output message="impl:getAllTheStocksResponse" name="getAllTheStocksResponse"></wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <wsdl:input message="impl:getStockRequest" name="getStockRequest"></wsdl:input>
+      <wsdl:output message="impl:getStockResponse" name="getStockResponse"></wsdl:output>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StockServiceImplSoapBinding" type="impl:StockServiceImpl">
     <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="update">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="create">
       <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="createRequest">
@@ -100,21 +133,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getStock">
-      <wsdlsoap:operation soapAction=""/>
-      <wsdl:input name="getStockRequest">
-        <wsdlsoap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="getStockResponse">
-        <wsdlsoap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getAllTheStocks">
       <wsdlsoap:operation soapAction=""/>
       <wsdl:input name="getAllTheStocksRequest">
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getAllTheStocksResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getStockRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStockResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -138,16 +171,54 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </ser:product>\r
       </ser:create>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d50de3ab-563a-43aa-9af2-f940c5e2a045" isOneWay="false" action="" name="getStock" bindingOperationName="getStock" type="Request-Response" outputName="getStockResponse" inputName="getStockRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54fbf822-a069-4fd6-9c2e-12a31baad4ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="fd6976ce-1237-4d6e-a90c-e827c00621a1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:create>\r
+         <ser:product>\r
+            <mod:amount>?</mod:amount>\r
+            <mod:id>?</mod:id>\r
+            <mod:lastCreated>?</mod:lastCreated>\r
+            <mod:lastUpdated>?</mod:lastUpdated>\r
+            <mod:name>?</mod:name>\r
+            <mod:price>?</mod:price>\r
+         </ser:product>\r
+      </ser:create>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/></con:call></con:operation><con:operation id="d50de3ab-563a-43aa-9af2-f940c5e2a045" isOneWay="false" action="" name="getStock" bindingOperationName="getStock" type="Request-Response" outputName="getStockResponse" inputName="getStockRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54fbf822-a069-4fd6-9c2e-12a31baad4ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:getStock>\r
          <ser:id>1</ser:id>\r
       </ser:getStock>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="73f876ef-60f9-43a8-a4a4-ffbb3b11f95d" isOneWay="false" action="" name="getAllTheStocks" bindingOperationName="getAllTheStocks" type="Request-Response" outputName="getAllTheStocksResponse" inputName="getAllTheStocksRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4bf5740-ce5b-4d8c-b8ba-5272fe5016b1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="7c7687c2-44c7-469b-a2f6-e9151a516fd1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getStock>\r
+         <ser:id>?</ser:id>\r
+      </ser:getStock>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/></con:call></con:operation><con:operation id="73f876ef-60f9-43a8-a4a4-ffbb3b11f95d" isOneWay="false" action="" name="getAllTheStocks" bindingOperationName="getAllTheStocks" type="Request-Response" outputName="getAllTheStocksResponse" inputName="getAllTheStocksRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4bf5740-ce5b-4d8c-b8ba-5272fe5016b1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:getAllTheStocks/>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>	]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="af4799b1-5ca7-4aa5-8e16-1191408adb27" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:getAllTheStocks/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/></con:call></con:operation><con:operation id="3d929b9c-cd3f-4c2f-b380-e4863f98abd3" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="updateRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b7c250a2-1868-486f-be3b-8253c2f932a4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:update>\r
+         <ser:product>\r
+            <mod:amount>7</mod:amount>\r
+            <mod:id>53</mod:id>\r       
+            <mod:name>REST API v2</mod:name>\r
+            <mod:price>5001</mod:price>\r
+         </ser:product>\r
+      </ser:update>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/updateRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

@@ -114,4 +114,27 @@ public class StockRepoImpl implements StockRepo {
 		return products;
 	}
 
+	@Override
+	public boolean update(Product product) {
+		
+		boolean returnValue = false;
+		
+		String updateQuery = "Update stock.product SET name='"+ product.getName() +"'"
+				+ ",amount=" + product.getAmount() 
+				+ ",price='" + product.getPrice() +"'"
+				+ ",lastUpdated='" + LocalDateTime.now().toString() +"' WHERE productID =" + product.getId();
+
+		try {
+				
+			DBUtils.runQuery(updateQuery);
+			returnValue = true;
+		} catch(SQLException sqle) {
+			System.out.println("excpetion in method update : " +sqle.getMessage());
+			
+		} finally {
+			DBUtils.close();
+		}
+		return returnValue;
+	}
+
 }

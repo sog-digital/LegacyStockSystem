@@ -31,5 +31,12 @@ public interface StockRepo {
 	 */
 	public Product[] getAllTheStocks();
 	
+	/**
+	 * 
+	 * @param product
+	 * @return boolean value
+	 */
+	public boolean update(Product product);
+	
 
 }

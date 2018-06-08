@@ -5,6 +5,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://service.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://model.lss.digital.sogeti.com"/>
+   <element name="update">
+    <complexType>
+     <sequence>
+      <element name="product" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateResponse">
+    <complexType>
+     <sequence>
+      <element name="updateReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="create">
     <complexType>
      <sequence>
@@ -19,6 +33,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getAllTheStocks">
+    <complexType/>
+   </element>
+   <element name="getAllTheStocksResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllTheStocksReturn" type="tns1:Product"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="getStock">
     <complexType>
      <sequence>
@@ -30,16 +54,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="getStockReturn" type="tns1:Product"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAllTheStocks">
-    <complexType/>
-   </element>
-   <element name="getAllTheStocksResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getAllTheStocksReturn" type="tns1:Product"/>
      </sequence>
     </complexType>
    </element>
@@ -61,6 +75,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="getAllTheStocksResponse">
 
       <wsdl:part element="impl:getAllTheStocksResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateResponse">
+
+      <wsdl:part element="impl:updateResponse" name="parameters">
 
       </wsdl:part>
 
@@ -106,7 +128,27 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="updateRequest">
+
+      <wsdl:part element="impl:update" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="StockServiceImpl">
+
+      <wsdl:operation name="update">
+
+         <wsdl:input message="impl:updateRequest" name="updateRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateResponse" name="updateResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="create">
 
@@ -115,18 +157,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createResponse" name="createResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getStock">
-
-         <wsdl:input message="impl:getStockRequest" name="getStockRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getStockResponse" name="getStockResponse">
 
        </wsdl:output>
 
@@ -144,11 +174,41 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getStock">
+
+         <wsdl:input message="impl:getStockRequest" name="getStockRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getStockResponse" name="getStockResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="StockServiceImplSoapBinding" type="impl:StockServiceImpl">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="update">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="create">
 
@@ -168,24 +228,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getStock">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getStockRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getStockResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getAllTheStocks">
 
          <wsdlsoap:operation soapAction=""/>
@@ -197,6 +239,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getAllTheStocksResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getStock">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getStockRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getStockResponse">
 
             <wsdlsoap:body use="literal"/>
 

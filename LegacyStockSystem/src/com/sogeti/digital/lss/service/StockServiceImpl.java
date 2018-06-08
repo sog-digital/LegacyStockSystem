@@ -53,4 +53,18 @@ public class StockServiceImpl implements StockService {
 		return stockRepo.getAllTheStocks();
 	}
 
+	@Override
+	public boolean update(Product product) {
+
+		if(product == null ) {
+			
+			return false;
+		} else {
+
+			return stockRepo.update(product);
+		}
+	}
+	
+	
+
 }

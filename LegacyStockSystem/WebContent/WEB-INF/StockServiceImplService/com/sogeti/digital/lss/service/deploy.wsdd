@@ -10,13 +10,18 @@
       <parameter name="className" value="com.sogeti.digital.lss.service.StockServiceImpl"/>
       <parameter name="wsdlPortType" value="StockServiceImpl"/>
       <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="update" qname="operNS:update" returnQName="retNS:updateReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:product" type="tns:Product"/>
+      </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="create" qname="operNS:create" returnQName="retNS:createReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:product" type="tns:Product"/>
+      </operation>
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getAllTheStocks" qname="operNS:getAllTheStocks" returnQName="retNS:getAllTheStocksReturn" returnType="rtns:Product" soapAction="">
       </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getStock" qname="operNS:getStock" returnQName="retNS:getStockReturn" returnType="rtns:Product" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
       </operation>
-      <parameter name="allowedMethods" value="getStock create"/>
+      <parameter name="allowedMethods" value="getAllTheStocks getStock update create"/>
 
       <typeMapping xmlns:ns="http://model.lss.digital.sogeti.com" qname="ns:Product" type="java:com.sogeti.digital.lss.model.Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>
