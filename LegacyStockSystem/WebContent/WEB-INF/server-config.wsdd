@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -33,16 +33,14 @@
    <ns1:parameter qname="ns5:email" type="xsd:string"/>
    <ns1:parameter qname="ns5:password" type="xsd:string"/>
   </ns1:operation>
-  <ns1:parameter name="sendMultiRefs" value="false"/>
+  <ns1:parameter name="allowedMethods" value="read login changePassword"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="PersonServiceImpl"/>
+  <ns1:parameter name="className" value="com.sogeti.digital.lss.service.PersonServiceImpl"/>
   <ns1:parameter name="wsdlServicePort" value="PersonServiceImpl"/>
   <ns1:parameter name="schemaQualified" value="http://model.lss.digital.sogeti.com,http://service.lss.digital.sogeti.com"/>
-  <ns1:parameter name="className" value="com.sogeti.digital.lss.service.PersonServiceImpl"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="allowedMethods" value="read login changePassword"/>
-  <ns1:parameter name="wsdlPortType" value="PersonServiceImpl"/>
-  <ns1:parameter name="wsdlServiceElement" value="PersonServiceImplService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://service.lss.digital.sogeti.com"/>
-  <ns1:parameter name="sendXsiTypes" value="false"/>
+  <ns1:parameter name="wsdlServiceElement" value="PersonServiceImplService"/>
   <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns6:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.sogeti.digital.lss.model.Person" xmlns:ns6="http://model.lss.digital.sogeti.com"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
@@ -56,13 +54,17 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="StockServiceImpl" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="create" qname="ns7:create" returnQName="ns7:createReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="update" qname="ns7:update" returnQName="ns7:updateReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns7:product" type="ns8:Product" xmlns:ns8="http://model.lss.digital.sogeti.com"/>
   </ns1:operation>
-  <ns1:operation name="getStock" qname="ns9:getStock" returnQName="ns9:getStockReturn" returnType="ns10:Product" soapAction="" xmlns:ns10="http://model.lss.digital.sogeti.com" xmlns:ns9="http://service.lss.digital.sogeti.com">
-   <ns1:parameter qname="ns9:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="create" qname="ns9:create" returnQName="ns9:createReturn" returnType="xsd:boolean" soapAction="" xmlns:ns9="http://service.lss.digital.sogeti.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:product" type="ns10:Product" xmlns:ns10="http://model.lss.digital.sogeti.com"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="getStock create"/>
+  <ns1:operation name="getAllTheStocks" qname="ns11:getAllTheStocks" returnQName="ns11:getAllTheStocksReturn" returnType="ns12:Product" soapAction="" xmlns:ns11="http://service.lss.digital.sogeti.com" xmlns:ns12="http://model.lss.digital.sogeti.com"/>
+  <ns1:operation name="getStock" qname="ns13:getStock" returnQName="ns13:getStockReturn" returnType="ns14:Product" soapAction="" xmlns:ns13="http://service.lss.digital.sogeti.com" xmlns:ns14="http://model.lss.digital.sogeti.com">
+   <ns1:parameter qname="ns13:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAllTheStocks getStock update create"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="StockServiceImpl"/>
   <ns1:parameter name="className" value="com.sogeti.digital.lss.service.StockServiceImpl"/>
@@ -70,7 +72,7 @@
   <ns1:parameter name="schemaQualified" value="http://model.lss.digital.sogeti.com,http://service.lss.digital.sogeti.com"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://service.lss.digital.sogeti.com"/>
   <ns1:parameter name="wsdlServiceElement" value="StockServiceImplService"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.sogeti.digital.lss.model.Product" xmlns:ns11="http://model.lss.digital.sogeti.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.sogeti.digital.lss.model.Product" xmlns:ns15="http://model.lss.digital.sogeti.com"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

@@ -31,5 +31,14 @@ public interface StockService {
 	 */
 	public Product[] getAllTheStocks();
 	
+	/**
+	 * This method allows the users to update the stock details on to the 
+	 * Legacy Stock Control System
+	 * 
+	 * @param product
+	 * @return boolean value
+	 */
+	public boolean update(Product product);
+	
 	
 }

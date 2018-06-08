@@ -1,18 +1,11 @@
 package com.digital.tests.lss.service;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -81,7 +74,6 @@ public class StockServiceTest {
 		};
 
 		assertFalse("create stock failure", ssi.create(product));	
-		
 	}
 	
 	
@@ -150,7 +142,56 @@ public class StockServiceTest {
 		assertNotNull(returnedList, "make sure retuned list is not null");
 		assertEquals(3, returnedList.length);
 		assertEquals(productList, returnedList);
+	}
+	
+	@Test
+	public void updateStockDetails() {
 		
+		Product product = new Product();
+		product.setId(5);
+		product.setName("SOAP Services");
+		product.setAmount(50);
+		product.setPrice("5000");
+		
+		new Expectations() {
+			{
+				spi.update(product);
+				result = true;				
+			}
+		};
+
+		assertTrue("stock updated", ssi.update(product));
+	}
+	
+	@Test
+	public void updateStockDetailsWhenPassingNullObject() {
+		
+		new Expectations() {
+			{
+				result = false;				
+			}
+		};
+
+		assertFalse("stock updated not update when passing null object to the service", ssi.update(null));
+	}
+	
+	@Test
+	public void updateStockDetailsFails() {
+		
+		Product product = new Product();
+		product.setId(5);
+		product.setName("SOAP Services");
+		product.setAmount(50);
+		product.setPrice("5000");
+		
+		new Expectations() {
+			{
+				spi.update(product);
+				result = false;				
+			}
+		};
+
+		assertFalse("stock update failed", ssi.update(product));
 	}
 
 }
