@@ -64,7 +64,15 @@ public class StockServiceImpl implements StockService {
 			return stockRepo.update(product);
 		}
 	}
-	
-	
+
+	@Override
+	public boolean delete(int id) {
+		
+		if( id > 0 ) {
+			return stockRepo.delete(id);
+		} else {
+			return false;
+		}
+	}
 
 }

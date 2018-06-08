@@ -19,6 +19,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
           </sequence>
         </complexType>
       </element>
+      <element name="delete">
+        <complexType>
+          <sequence>
+            <element name="id" type="xsd:int"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="deleteResponse">
+        <complexType>
+          <sequence>
+            <element name="deleteReturn" type="xsd:boolean"/>
+          </sequence>
+        </complexType>
+      </element>
       <element name="create">
         <complexType>
           <sequence>
@@ -77,6 +91,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:message name="updateResponse">
     <wsdl:part element="impl:updateResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="deleteRequest">
+    <wsdl:part element="impl:delete" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="getAllTheStocksRequest">
     <wsdl:part element="impl:getAllTheStocks" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -89,6 +106,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:message name="getStockResponse">
     <wsdl:part element="impl:getStockResponse" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part element="impl:deleteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="createRequest">
     <wsdl:part element="impl:create" name="parameters"></wsdl:part>
   </wsdl:message>
@@ -99,6 +119,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <wsdl:operation name="update">
       <wsdl:input message="impl:updateRequest" name="updateRequest"></wsdl:input>
       <wsdl:output message="impl:updateResponse" name="updateResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input message="impl:deleteRequest" name="deleteRequest"></wsdl:input>
+      <wsdl:output message="impl:deleteResponse" name="deleteResponse"></wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="create">
       <wsdl:input message="impl:createRequest" name="createRequest"></wsdl:input>
@@ -121,6 +145,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
         <wsdlsoap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="updateResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="deleteRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
         <wsdlsoap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -171,45 +204,19 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </ser:product>\r
       </ser:create>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="fd6976ce-1237-4d6e-a90c-e827c00621a1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:create>\r
-         <ser:product>\r
-            <mod:amount>?</mod:amount>\r
-            <mod:id>?</mod:id>\r
-            <mod:lastCreated>?</mod:lastCreated>\r
-            <mod:lastUpdated>?</mod:lastUpdated>\r
-            <mod:name>?</mod:name>\r
-            <mod:price>?</mod:price>\r
-         </ser:product>\r
-      </ser:create>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/></con:call></con:operation><con:operation id="d50de3ab-563a-43aa-9af2-f940c5e2a045" isOneWay="false" action="" name="getStock" bindingOperationName="getStock" type="Request-Response" outputName="getStockResponse" inputName="getStockRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54fbf822-a069-4fd6-9c2e-12a31baad4ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/createRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="d50de3ab-563a-43aa-9af2-f940c5e2a045" isOneWay="false" action="" name="getStock" bindingOperationName="getStock" type="Request-Response" outputName="getStockResponse" inputName="getStockRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="54fbf822-a069-4fd6-9c2e-12a31baad4ab" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:getStock>\r
          <ser:id>1</ser:id>\r
       </ser:getStock>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="7c7687c2-44c7-469b-a2f6-e9151a516fd1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:getStock>\r
-         <ser:id>?</ser:id>\r
-      </ser:getStock>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/></con:call></con:operation><con:operation id="73f876ef-60f9-43a8-a4a4-ffbb3b11f95d" isOneWay="false" action="" name="getAllTheStocks" bindingOperationName="getAllTheStocks" type="Request-Response" outputName="getAllTheStocksResponse" inputName="getAllTheStocksRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4bf5740-ce5b-4d8c-b8ba-5272fe5016b1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getStockRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="73f876ef-60f9-43a8-a4a4-ffbb3b11f95d" isOneWay="false" action="" name="getAllTheStocks" bindingOperationName="getAllTheStocks" type="Request-Response" outputName="getAllTheStocksResponse" inputName="getAllTheStocksRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d4bf5740-ce5b-4d8c-b8ba-5272fe5016b1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:getAllTheStocks/>\r
    </soapenv:Body>\r
-</soapenv:Envelope>	]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="af4799b1-5ca7-4aa5-8e16-1191408adb27" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:getAllTheStocks/>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/></con:call></con:operation><con:operation id="3d929b9c-cd3f-4c2f-b380-e4863f98abd3" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="updateRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b7c250a2-1868-486f-be3b-8253c2f932a4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+</soapenv:Envelope>	]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/getAllTheStocksRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3d929b9c-cd3f-4c2f-b380-e4863f98abd3" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="updateRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b7c250a2-1868-486f-be3b-8253c2f932a4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:update>\r
@@ -221,4 +228,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </ser:product>\r
       </ser:update>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/updateRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/updateRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2accc786-fa24-42f6-9177-3bac496a9843" isOneWay="false" action="" name="delete" bindingOperationName="delete" type="Request-Response" outputName="deleteResponse" inputName="deleteRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7c07c5f7-1414-4b3b-bb91-821979a08939" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/StockServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:delete>\r
+         <ser:id>50</ser:id>\r
+      </ser:delete>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/StockServiceImpl/deleteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
