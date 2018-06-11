@@ -40,5 +40,13 @@ public interface StockService {
 	 */
 	public boolean update(Product product);
 	
+	/**
+	 * This method allows the users to delete the stock on to the 
+	 * Legacy Stock Control System
+	 * 
+	 * @param id is product id
+	 * @return boolean value
+	 */
+	public boolean delete(int id);
 	
 }

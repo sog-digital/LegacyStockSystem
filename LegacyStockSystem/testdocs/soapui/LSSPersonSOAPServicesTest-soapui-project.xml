@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="24f91483-84c8-402e-a7fc-ef5c76509986" activeEnvironment="Default" name="LSSPersonSOAPServicesTest" resourceRoot="" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="8292ec8e-2c5c-4766-b22a-31b39a210d81" wsaVersion="NONE" name="PersonServiceImplSoapBinding" type="wsdl" bindingName="{http://service.lss.digital.sogeti.com}PersonServiceImplSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl"><con:part><con:url>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.lss.digital.sogeti.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.lss.digital.sogeti.com" xmlns:intf="http://service.lss.digital.sogeti.com" xmlns:tns1="http://model.lss.digital.sogeti.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project id="24f91483-84c8-402e-a7fc-ef5c76509986" activeEnvironment="Default" name="LSSPersonSOAPServicesTest" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="8292ec8e-2c5c-4766-b22a-31b39a210d81" wsaVersion="NONE" name="PersonServiceImplSoapBinding" type="wsdl" bindingName="{http://service.lss.digital.sogeti.com}PersonServiceImplSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl"><con:part><con:url>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://service.lss.digital.sogeti.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.lss.digital.sogeti.com" xmlns:intf="http://service.lss.digital.sogeti.com" xmlns:tns1="http://model.lss.digital.sogeti.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
   <wsdl:types>
@@ -22,7 +22,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       <element name="read">
         <complexType>
           <sequence>
-            <element name="email" type="xsd:string"/>
+            <element name="id" type="xsd:int"/>
           </sequence>
         </complexType>
       </element>
@@ -66,13 +66,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <schema elementFormDefault="qualified" targetNamespace="http://model.lss.digital.sogeti.com" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Person">
         <sequence>
-          <element name="dob" nillable="true" type="xsd:string"/>
+          <element name="dob" nillable="true" type="xsd:dateTime"/>
           <element name="email" nillable="true" type="xsd:string"/>
           <element name="firstName" nillable="true" type="xsd:string"/>
           <element name="id" type="xsd:int"/>
-          <element name="lastCreated" nillable="true" type="xsd:string"/>
           <element name="lastName" nillable="true" type="xsd:string"/>
-          <element name="lastUpdated" nillable="true" type="xsd:string"/>
           <element name="password" nillable="true" type="xsd:string"/>
         </sequence>
       </complexType>
@@ -164,41 +162,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       <wsdlsoap:address location="http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint></con:endpoints><con:operation id="ddf28021-842d-43b4-aa99-27498cc06a94" isOneWay="false" action="" name="changePassword" bindingOperationName="changePassword" type="Request-Response" outputName="changePasswordResponse" inputName="changePasswordRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1826af1d-d800-4853-9add-7e25aa8a4e0c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint></con:endpoints><con:operation id="ddf28021-842d-43b4-aa99-27498cc06a94" isOneWay="false" action="" name="changePassword" bindingOperationName="changePassword" type="Request-Response" outputName="changePasswordResponse" inputName="changePasswordRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="20c76590-7fb4-4c21-944f-bea030f6a915" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:changePassword>\r
-         <ser:person>\r
-            <mod:dob>?</mod:dob>\r
-            <mod:email>?</mod:email>\r
-            <mod:firstName>?</mod:firstName>\r
-            <mod:id>1</mod:id>\r
-            <mod:lastCreated>?</mod:lastCreated>\r
-            <mod:lastName>?</mod:lastName>\r
-            <mod:lastUpdated>?</mod:lastUpdated>\r
-            <mod:password>newpass</mod:password>\r
-         </ser:person>\r
-      </ser:changePassword>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/changePasswordRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="2c4f4aba-5216-4b50-9d99-c5bba9acbacf" isOneWay="false" action="" name="login" bindingOperationName="login" type="Request-Response" outputName="loginResponse" inputName="loginRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="35470ecb-6854-4086-a610-20a4d56c85ac" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[	<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
-	   <soapenv:Header/>\r
-	   <soapenv:Body>\r
-	      <ser:login>\r
-	         <ser:email>sogeti@sogeti.com</ser:email>\r
-	         <ser:password>asas</ser:password>\r
-	      </ser:login>\r
-	   </soapenv:Body>\r
-	</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/loginRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c2f33a67-e76f-4725-81ff-18e1ebcb6137" isOneWay="false" action="" name="read" bindingOperationName="read" type="Request-Response" outputName="readResponse" inputName="readRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f4ee9877-0646-4a93-9c19-7e8daadc9cdd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:read>\r
-         <ser:email>sogeti@sogeti.com</ser:email>\r
-      </ser:read>\r
-   </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/readRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3a1622b6-4077-4baa-89a0-5ef324a18e42" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="updateRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d41ed7a5-a56f-43e1-b104-9a4df46c72cf" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
-   <soapenv:Header/>\r
-   <soapenv:Body>\r
-      <ser:update>\r
          <ser:person>\r
             <mod:dob>?</mod:dob>\r
             <mod:email>?</mod:email>\r
@@ -207,9 +174,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
             <mod:lastName>?</mod:lastName>\r
             <mod:password>?</mod:password>\r
          </ser:person>\r
-      </ser:update>\r
+      </ser:changePassword>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/updateRequest"/></con:call><con:call id="ec7e6571-2ddd-4548-8967-17444344a11d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/changePasswordRequest"/></con:call></con:operation><con:operation id="2c4f4aba-5216-4b50-9d99-c5bba9acbacf" isOneWay="false" action="" name="login" bindingOperationName="login" type="Request-Response" outputName="loginResponse" inputName="loginRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="35470ecb-6854-4086-a610-20a4d56c85ac" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[	<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+	   <soapenv:Header/>\r
+	   <soapenv:Body>\r
+	      <ser:login>\r
+	         <ser:email>sogeti@sogeti.com</ser:email>\r
+	         <ser:password>asas</ser:password>\r
+	      </ser:login>\r
+	   </soapenv:Body>\r
+	</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/loginRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c2f33a67-e76f-4725-81ff-18e1ebcb6137" isOneWay="false" action="" name="read" bindingOperationName="read" type="Request-Response" outputName="readResponse" inputName="readRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2d6f89b2-08be-419e-b5f8-f329681e6de9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <ser:read>\r
+         <ser:id>?</ser:id>\r
+      </ser:read>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://service.lss.digital.sogeti.com/PersonServiceImpl/readRequest"/></con:call></con:operation><con:operation id="3a1622b6-4077-4baa-89a0-5ef324a18e42" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateResponse" inputName="updateRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d41ed7a5-a56f-43e1-b104-9a4df46c72cf" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/LegacyStockSystem/services/PersonServiceImpl</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.lss.digital.sogeti.com" xmlns:mod="http://model.lss.digital.sogeti.com">\r
    <soapenv:Header/>\r
    <soapenv:Body>\r
       <ser:update>\r
@@ -218,9 +200,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
             <mod:email>?</mod:email>\r
             <mod:firstName>?</mod:firstName>\r
             <mod:id>?</mod:id>\r
-            <mod:lastCreated>?</mod:lastCreated>\r
             <mod:lastName>?</mod:lastName>\r
-            <mod:lastUpdated>?</mod:lastUpdated>\r
             <mod:password>?</mod:password>\r
          </ser:person>\r
       </ser:update>\r

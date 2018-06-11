@@ -137,4 +137,25 @@ public class StockRepoImpl implements StockRepo {
 		return returnValue;
 	}
 
+	@Override
+	public boolean delete(int id) {
+		boolean returnValue = false;
+		
+		String updateQuery = "Delete from stock.product WHERE productID =" + id;
+
+		try {
+				
+			DBUtils.runQuery(updateQuery);
+			returnValue = true;
+		} catch(SQLException sqle) {
+			System.out.println("excpetion in method update : " +sqle.getMessage());
+			
+		} finally {
+			DBUtils.close();
+		}
+		
+		
+		return returnValue;
+	}
+
 }

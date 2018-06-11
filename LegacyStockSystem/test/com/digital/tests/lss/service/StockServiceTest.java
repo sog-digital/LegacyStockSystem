@@ -27,7 +27,6 @@ public class StockServiceTest {
 	@Tested
 	private StockServiceImpl ssi;
 	
-	
 	@Test	
 	public void createStock() {
 		
@@ -192,6 +191,44 @@ public class StockServiceTest {
 		};
 
 		assertFalse("stock update failed", ssi.update(product));
+	}
+	
+	@Test
+	public void deleteStock() {
+		
+		new Expectations() {
+			{
+				spi.delete(1);
+				result = true;				
+			}
+		};
+
+		assertTrue("delete a stock", ssi.delete(1));
+	}
+	
+	@Test
+	public void deleteStockWhenPassingZeroValue() {
+		
+		new Expectations() {
+			{
+				result = false;				
+			}
+		};
+
+		assertFalse("delete a stock", ssi.delete(0));
+	}
+	
+	@Test
+	public void deleteStockFails() {
+		
+		new Expectations() {
+			{
+				spi.delete(1);
+				result = false;				
+			}
+		};
+
+		assertFalse("delete a stock fails", ssi.delete(1));
 	}
 
 }
