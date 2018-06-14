@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import com.sogeti.digital.lss.model.Person;
 import com.sogeti.digital.lss.repository.PersonRepoImpl;
 import com.sogeti.digital.lss.service.PersonServiceImpl;
+import com.sogeti.digital.utils.PasswordUtils;
 
 import mockit.Expectations;
 import mockit.Mocked;
@@ -25,80 +26,11 @@ public class PersonServiceTest {
 	@Mocked
 	private PersonRepoImpl pr;
 	
+	@Mocked 
+	private PasswordUtils passUtils;
+	
 	@Tested
 	private PersonServiceImpl psi;
-	
-	
-	@Test	
-	public void validLogin() {
-		
-		Person personReturned = new Person();
-		personReturned.setId(1);
-		personReturned.setFirstName("sogeti");
-		personReturned.setLastName("ireland");
-		personReturned.setDob("01-01-1967");
-		personReturned.setEmail("sogeti@sogeti.com");
-		personReturned.setPassword("pass");
-		
-		new Expectations() {
-			{	
-				pr.read("sogeti@sogeti.com");
-				result = personReturned;
-			}
-		};
-		
-		assertTrue("login not successful", psi.login("sogeti@sogeti.com", "pass"));
-	}
-	
-	@Test	
-	public void loginFailureDueToEmail() {
-		
-		Person personReturned = null;
-		
-		new Expectations() {
-			{
-				pr.read("sogeti@soi.com");
-				result = personReturned;				
-			}
-		};
-
-		assertFalse("login failure due to email address", psi.login("sogeti@soi.com", "pass"));
-	}
-	
-	@Test	
-	public void loginFailureDueToPassword() {
-		
-		Person personReturned = new Person();
-		personReturned.setId(1);
-		personReturned.setFirstName("sogeti");
-		personReturned.setLastName("ireland");
-		personReturned.setDob("01-01-1967");
-		personReturned.setEmail("sogeti@sogeti.com");
-		personReturned.setPassword("pass");
-		
-		new Expectations() {
-			{
-				pr.read("sogeti@sogeti.com");
-				result = personReturned;				
-			}
-		};
-
-		assertFalse("login failure due to password", psi.login("sogeti@sogeti.com", "wrongpass"));
-	}
-
-	@Test	
-	public void loginFailureDueToEmailAndPassword() {
-		
-		Person personReturned = null;
-		new Expectations() {
-			{
-				pr.read("sogeti@sti.com");
-				result = personReturned;				
-			}
-		};
-
-		assertFalse("login failure due to email address and password", psi.login("sogeti@sti.com", "wrongpass"));
-	}
 
 	@Test
 	public void checkPersonDetails() {
@@ -165,6 +97,77 @@ public class PersonServiceTest {
 		};
 
 		assertFalse("change password failure", psi.changePassword(person));
+	}
+	
+	
+	@Test	
+	public void validSecureLogin() {
+		
+		Person personReturned = new Person();
+		personReturned.setEmail("sogeti@sogeti.com");
+		personReturned.setPassword("d3EZNGOxjg1BPkAM94UYOA==");
+		
+		new Expectations() {
+			{	
+				pr.read("sogeti@sogeti.com");
+				result = personReturned;
+				PasswordUtils.decrypt("d3EZNGOxjg1BPkAM94UYOA==");
+				result = "pass";
+
+			}
+		};
+		
+		assertTrue("secure login successful", psi.secureLogin("sogeti@sogeti.com", "d3EZNGOxjg1BPkAM94UYOA=="));
+	}
+	
+	@Test	
+	public void secureLoginFailureDueToWrongPassword() {
+		
+		Person personReturned = new Person();
+		personReturned.setEmail("sogeti@sogeti.com");
+		personReturned.setPassword("d3EZNGOxjg1BPkAM94UYOA==");
+		
+		new Expectations() {
+			{	
+				pr.read("sogeti@sogeti.com");
+				result = personReturned;
+				PasswordUtils.decrypt("d3EZNGOxjg1BPkAMA==");
+				result = "wpass";
+				PasswordUtils.decrypt(personReturned.getPassword());
+				result = "pass";
+				
+
+			}
+		};
+		
+		assertFalse("secure login failed due to wrong password", psi.secureLogin("sogeti@sogeti.com", "d3EZNGOxjg1BPkAMA=="));
+	}
+	
+	@Test	
+	public void secureLoginFailureDueToWrongEmail() {
+		
+		new Expectations() {
+			{	
+				pr.read("sogeti@soi.com");
+				result = null;
+	
+			}
+		};
+		
+		assertFalse("secure login failed due to wrong email", psi.secureLogin("sogeti@soi.com", "d3EZNGOxjg1BPkAM94UYOA=="));
+	}
+	
+	@Test	
+	public void secureLoginFailureDueToWrongEmailAndPassword() {
+		
+		new Expectations() {
+			{	
+				pr.read("sogeti@sogi.com");
+				result = null;
+				}
+		};
+		
+		assertFalse("secure login failed due to wrong email and password", psi.secureLogin("sogeti@sogi.com", "d3EZNGMA=="));
 	}
 	
 }

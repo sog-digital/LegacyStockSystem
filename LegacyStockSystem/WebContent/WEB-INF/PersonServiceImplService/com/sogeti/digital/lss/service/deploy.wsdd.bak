@@ -23,14 +23,14 @@
       <operation name="read" qname="operNS:read" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:readReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:Person" xmlns:rtns="http://model.lss.digital.sogeti.com" soapAction="" >
         <parameter qname="pns:email" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="login" qname="operNS:login" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:loginReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:email" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:password" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
       <operation name="changePassword" qname="operNS:changePassword" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:changePasswordReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:person" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:Person" xmlns:tns="http://model.lss.digital.sogeti.com"/>
       </operation>
-      <parameter name="allowedMethods" value="read login changePassword"/>
+      <operation name="secureLogin" qname="operNS:secureLogin" xmlns:operNS="http://service.lss.digital.sogeti.com" returnQName="retNS:secureLoginReturn" xmlns:retNS="http://service.lss.digital.sogeti.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:encryptedPassword" xmlns:pns="http://service.lss.digital.sogeti.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="read secureLogin changePassword"/>
 
       <typeMapping
         xmlns:ns="http://model.lss.digital.sogeti.com"
