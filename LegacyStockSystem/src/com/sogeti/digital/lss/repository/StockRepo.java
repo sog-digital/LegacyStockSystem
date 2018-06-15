@@ -17,7 +17,7 @@ public interface StockRepo {
 	 * @param product
 	 * @return
 	 */
-	public boolean create(Product product);
+	public int create(Product product);
 	
 	
 	/**

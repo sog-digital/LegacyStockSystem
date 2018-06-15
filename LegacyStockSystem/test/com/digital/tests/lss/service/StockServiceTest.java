@@ -38,11 +38,11 @@ public class StockServiceTest {
 		new Expectations() {
 			{
 				spi.create(product);
-				result = true;				
+				result = 1;				
 			}
 		};
 
-		assertTrue("create stock", ssi.create(product));
+		assertEquals(1, ssi.create(product));
 	}
 	
 	@Test	
@@ -50,11 +50,11 @@ public class StockServiceTest {
 
 		new Expectations() {
 			{
-				result = false;				
+				result = -1;				
 			}
 		};
 
-		assertFalse("create stock failed", ssi.create(null));
+		assertEquals(-1, ssi.create(null));
 	}
 	
 	@Test
@@ -68,11 +68,11 @@ public class StockServiceTest {
 		new Expectations() {
 			{
 				spi.create(product);
-				result = false;				
+				result = -1;				
 			}
 		};
 
-		assertFalse("create stock failure", ssi.create(product));	
+		assertEquals(-1, ssi.create(product));	
 	}
 	
 	

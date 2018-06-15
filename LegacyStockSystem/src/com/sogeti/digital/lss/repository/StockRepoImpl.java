@@ -24,8 +24,8 @@ public class StockRepoImpl implements StockRepo {
 	 * @see com.sogeti.digital.lss.repository.StockRepo#create(com.sogeti.digital.lss.model.Product)
 	 */
 	@Override
-	public boolean create(Product product) {
-		boolean returnValue = true;
+	public int create(Product product) {
+		int returnValue = -1;
 		
 		
 		String insertQuery = "Insert INTO stock.product (Name, price, amount, lastcreated, lastupdated) VALUES( '"+product.getName() +"'"
@@ -36,10 +36,10 @@ public class StockRepoImpl implements StockRepo {
 
 		try {
 				
-			DBUtils.runQuery(insertQuery);
+			returnValue = DBUtils.runInsertQuery(insertQuery);
 		} catch(SQLException sqle) {
 			System.out.println("excpetion in method create Product : " +sqle.getMessage());
-			returnValue = false;
+			returnValue = -1;
 		} finally {
 			DBUtils.close();
 		}

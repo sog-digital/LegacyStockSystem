@@ -21,14 +21,24 @@ public class StockServiceImpl implements StockService {
 	 * @see com.sogeti.digital.lss.service.StockService#create(com.sogeti.digital.lss.model.Product)
 	 */
 	@Override
-	public boolean create(Product product) {
+	public int create(Product product) {
+		
+		int stockid = -1;
 	
 		if(product == null ) {
 			
-			return false;
+			return -1;
 		} else {
 			
-			return stockRepo.create(product);
+			stockid = stockRepo.create(product);
+	
+			if( stockid > 0 ) {
+				
+				return stockid;
+			} else {
+				
+				return -1;
+			}
 		}
 	}
 

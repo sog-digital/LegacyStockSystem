@@ -16,13 +16,13 @@
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="delete" qname="operNS:delete" returnQName="retNS:deleteReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
       </operation>
-      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="create" qname="operNS:create" returnQName="retNS:createReturn" returnType="rtns:boolean" soapAction="">
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="create" qname="operNS:create" returnQName="retNS:createReturn" returnType="rtns:int" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://model.lss.digital.sogeti.com" qname="pns:product" type="tns:Product"/>
-      </operation>
-      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getAllTheStocks" qname="operNS:getAllTheStocks" returnQName="retNS:getAllTheStocksReturn" returnType="rtns:Product" soapAction="">
       </operation>
       <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getStock" qname="operNS:getStock" returnQName="retNS:getStockReturn" returnType="rtns:Product" soapAction="">
         <parameter xmlns:pns="http://service.lss.digital.sogeti.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://service.lss.digital.sogeti.com" xmlns:retNS="http://service.lss.digital.sogeti.com" xmlns:rtns="http://model.lss.digital.sogeti.com" name="getAllTheStocks" qname="operNS:getAllTheStocks" returnQName="retNS:getAllTheStocksReturn" returnType="rtns:Product" soapAction="">
       </operation>
       <parameter name="allowedMethods" value="getAllTheStocks getStock update create delete"/>
 

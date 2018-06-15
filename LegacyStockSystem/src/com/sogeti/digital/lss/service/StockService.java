@@ -8,10 +8,11 @@ public interface StockService {
 	
 	/**
 	 * This method allows the users to create a new stock on the Legacy Stock Control System
+	 * 
 	 * @param product have details for a new stock
-	 * @return boolean value 
+	 * @return integer value as the stock id
 	 */
-	public boolean create(Product product);
+	public int create(Product product);
 	
 	
 	/**
