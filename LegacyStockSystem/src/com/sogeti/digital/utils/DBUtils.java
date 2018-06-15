@@ -56,6 +56,22 @@ public class DBUtils {
 		PreparedStatement st = con.prepareStatement(query);
 		st.executeUpdate();
 	}
+	
+	public static int runInsertQuery(String query) throws SQLException {
+		
+		int idValue = -1;
+		
+		con = loadDriver();
+		PreparedStatement st = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+		
+		st.executeUpdate();
+		ResultSet rs = st.getGeneratedKeys();
+		if(rs != null && rs.next()) {
+			
+			idValue = rs.getInt(1);
+		}
+		return idValue;
+	}
 
 
 	// You need to close the resultSet
